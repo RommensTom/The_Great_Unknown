@@ -70,7 +70,6 @@ var handleErrors = function (response) {
 
 var geefLand = function () {
     var RandomNumber = Math.floor((Math.random() * 999) + 1);
-    //var landeke = countries[RandomNumber];
     fetch("https://restcountries.eu/rest/v2/callingcode/" + RandomNumber)
         .then(handleErrors)
         .then(response => response.json())
