@@ -1,4 +1,4 @@
-RandomCountryUrl = "http://localhost:63342/TakeMeAway_Project_WithoutNode/RandomCountry.html";
+RandomCountryUrl = "https://rommenstom.github.io/The_Great_Unknown/RandomCountry.html";
 
 // if ('serviceWorker' in navigator) {
 //     navigator.serviceWorker
