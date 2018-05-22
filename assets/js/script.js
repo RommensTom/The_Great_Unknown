@@ -83,7 +83,12 @@ var handleErrors = function(response) {
                 $('#flag').append("<img src=' "+ res[0].flag + " ' alt='Country flag'>");
                 $('#population').append(res[0].population);
                 $('#region').append(res[0].region);
-                $('#currencies').append(res[0].currencies[0].name + " (" + res[0].currencies[0].symbol + ")" );
+                let $resultaatString = res[0].currencies[0].name;
+                const currenciesSymbol = res[0].currencies[0].symbol;
+                if (currenciesSymbol != null){
+                    $resultaatString += ` ( ${currenciesSymbol} )`;
+                }
+                $('#currencies').append($resultaatString);
                 var code = res[0].alpha2Code;
                 $('#tickets').append("<button class='button-one' onclick=' location.href= \" https://www.skyscanner.net/transport/flights/brus/SG/180526/180602/?adults=1&children=0&adultsv2=1&childrenv2=&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&ref=home \" '>Look for tickets</button>")
                 var locatie1 = "https://www.google.com/maps/embed/v1/place?q=" + res[0].latlng[0] + "%2C" + res[0].latlng[1] + "&key=AIzaSyB2VV0_vn7reEhn-N6ULWQKB8sxJzl_-zQ";
