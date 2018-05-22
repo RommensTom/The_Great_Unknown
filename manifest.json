@@ -5,7 +5,7 @@
   "background_color": "#e8d93d",
   "display": "fullscreen",
   "Scope": "/",
-  "start_url": "/index.html",
+  "start_url": "https://rommenstom.github.io/The_Great_Unknown/index.html",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
