@@ -1,4 +1,4 @@
-RandomCountryUrl = "https://rommenstom.github.io/The_Great_Unknown/RandomCountry.html";
+const RandomCountryUrl = "RandomCountry.html";
 
 // if ('serviceWorker' in navigator) {
 //     navigator.serviceWorker
@@ -97,7 +97,7 @@ var handleErrors = function(response) {
 
 
 $('document').ready(function () {
-    if (document.URL == RandomCountryUrl) {
+    if (document.URL.indexOf(RandomCountryUrl) > 1) {
         geefLand();
     }
 });
