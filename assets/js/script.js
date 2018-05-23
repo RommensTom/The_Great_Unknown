@@ -1,4 +1,5 @@
 const RandomCountryUrl = "RandomCountry.html";
+var countries = [];
 
 // if ('serviceWorker' in navigator) {
 //     navigator.serviceWorker
@@ -26,7 +27,7 @@ if (navigator.serviceWorker.controller) {
 //     console.log(JSON.stringify(error));
 // });
 
-// var geefLand = function (e) {
+// var giveRandomCountry = function (e) {
 //     //var RandomNumber = Math.floor((Math.random()*300)+1);
 //     const url = 'https://restcountries.eu/rest/v2/callingcode/'+372;
 //     fetch(url)
@@ -41,8 +42,8 @@ if (navigator.serviceWorker.controller) {
 //         });
 // };
 //
-// geefLand();
-// var geefLand= function() {
+// giveRandomCountry();
+// var giveRandomCountry= function() {
 //     var RandomNumber = Math.floor((Math.random()*195)+1);
 //     var landeke = countries[RandomNumber];
 //     fetch("https://restcountries.eu/rest/v2/name/"+landeke)
@@ -55,7 +56,7 @@ if (navigator.serviceWorker.controller) {
 //             console.log(myJson[0].name);
 //         }).catch(function (error) {
 //             console.log("error");
-//             //geefLand();
+//             //giveRandomCountry();
 //     });
 // };
 
@@ -68,7 +69,7 @@ var handleErrors = function (response) {
 };
 
 
-var geefLand = function () {
+var giveRandomCountry = function () {
     var RandomNumber = Math.floor((Math.random() * 999) + 1);
     fetch("https://restcountries.eu/rest/v2/callingcode/" + RandomNumber)
         .then(handleErrors)
@@ -77,6 +78,7 @@ var geefLand = function () {
             console.log(res);
             console.log(res[0].name);
             $('#Country').append("The great " + res[0].name);
+            saveCountry(res[0].name);
             $('#name').append(res[0].name);
             $('#capital').append(res[0].capital);
             $('#flag').append("<img src=' " + res[0].flag + " ' alt='Country flag'>");
@@ -95,14 +97,45 @@ var geefLand = function () {
         }).catch(error => {
         // console.error(error);
         // console.log("lol");
-        geefLand();
+        giveRandomCountry();
     })
 };
 
+var saveCountry = function (country) {
+    if((typeof Storage) !== void(0)) {
+        countries.push(country);
+        localStorage.setItem('countries', JSON.stringify(countries));
+    }
+};
+
+var getCountry = function(){
+    if((typeof Storage)  !== void(0)) {
+        var localCountries = JSON.parse(localStorage.getItem('countries'));
+
+        if( localCountries  !== null) {
+            countries = localCountries;
+            displayCountries();
+        }
+    }
+
+};
+
+var displayCountries = function () {
+    var numberOfRandomCountries = countries.length;
+    if(numberOfRandomCountries > 0){
+        var list = '<ul>';
+        for(var i =0; i < numberOfRandomCountries; i++) {
+            list += '<li>'+ countries[i] + '</li>';
+        }
+
+        list += '</ul>';
+        $('#supporters').html(list);
+    }
+};
 
 $('document').ready(function () {
     if (document.URL.indexOf(RandomCountryUrl) > 1) {
-        geefLand();
+        giveRandomCountry();
     }
 });
 // var toonQuote = function (e) {
