@@ -1,5 +1,16 @@
 const RandomCountryUrl = "RandomCountry.html";
+// function createANewStorage() {
+//     if(localStorage.getItem('countries') == null) {
+//         var countries = [];
+//     }else{
+//         console.log("Localstorage is al ready")
+//     }
+// }
+
 var countries = [];
+// fillInCountriesList();
+
+
 
 // if ('serviceWorker' in navigator) {
 //     navigator.serviceWorker
@@ -23,42 +34,6 @@ if (navigator.serviceWorker.controller) {
     });
 }
 
-// .catch(function (error) {
-//     console.log(JSON.stringify(error));
-// });
-
-// var giveRandomCountry = function (e) {
-//     //var RandomNumber = Math.floor((Math.random()*300)+1);
-//     const url = 'https://restcountries.eu/rest/v2/callingcode/'+372;
-//     fetch(url)
-//         .then(function(response) {
-//            console.log(JSON.parse(response));
-//             console.log(response);
-//             //console.log(myJson[0].name);
-//             $('#Country').append("The great " + myJson[0].name);
-//         })
-//         .catch(function() {
-//             console.log("Error")
-//         });
-// };
-//
-// giveRandomCountry();
-// var giveRandomCountry= function() {
-//     var RandomNumber = Math.floor((Math.random()*195)+1);
-//     var landeke = countries[RandomNumber];
-//     fetch("https://restcountries.eu/rest/v2/name/"+landeke)
-//         .then(handleErrors)
-//         .then(function (response) {
-//             console.log(response);
-//             console.log(response.type);
-//             var myJson =response.json();
-//             console.log(myJson);
-//             console.log(myJson[0].name);
-//         }).catch(function (error) {
-//             console.log("error");
-//             //giveRandomCountry();
-//     });
-// };
 
 
 var handleErrors = function (response) {
@@ -90,8 +65,9 @@ var giveRandomCountry = function () {
                 $resultaatString += ` ( ${currenciesSymbol} )`;
             }
             $('#currencies').append($resultaatString);
-            var code = res[0].alpha2Code;
-            $('#tickets').append("<button class='button-one' onclick=' location.href= \" https://www.skyscanner.net/transport/flights/brus/SG/180526/180602/?adults=1&children=0&adultsv2=1&childrenv2=&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&ref=home \" '>Look for tickets</button>")
+            let code = res[0].alpha2Code;
+            let button = `<button class='button-one' onclick=' location.href= "https://www.skyscanner.net/transport/flights/brus/${code}/180526/180602/?adults=1&children=0&adultsv2=1&childrenv2=&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&ref=home"' \>Look for tickets</button>`;
+            $('#tickets').append(button);
             var locatie1 = "https://www.google.com/maps/embed/v1/place?q=" + res[0].latlng[0] + "%2C" + res[0].latlng[1] + "&key=AIzaSyB2VV0_vn7reEhn-N6ULWQKB8sxJzl_-zQ";
             $('#locatie').attr("src", locatie1);
         }).catch(error => {
@@ -102,11 +78,12 @@ var giveRandomCountry = function () {
 };
 
 var saveCountry = function (country) {
-    if((typeof Storage) !== void(0)) {
+     if((typeof Storage) !== void(0)) {
         countries.push(country);
         localStorage.setItem('countries', JSON.stringify(countries));
-    }
+     }
 };
+
 
 var getCountry = function(){
     if((typeof Storage)  !== void(0)) {
@@ -129,11 +106,17 @@ var displayCountries = function () {
         }
 
         list += '</ul>';
-        $('#supporters').html(list);
+        $('#historyList').append(list);
     }
 };
 
+var test = function () {
+
+}
+
 $('document').ready(function () {
+    //createANewStorage();
+    getCountry();
     if (document.URL.indexOf(RandomCountryUrl) > 1) {
         giveRandomCountry();
     }
