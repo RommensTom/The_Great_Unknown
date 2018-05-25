@@ -1,8 +1,11 @@
+
+
 body {
     padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     background-color: #E8D93D;
 }
+
 
 a {
     color: #00B7FF;
@@ -22,13 +25,18 @@ article{
     margin: 5%;
 }
 
+article h4,
+article div {
+    margin-bottom: 2%;
+}
+
 img{
     width: 100%;
     height: 100%;
 }
 .button-one {
     width: 100%;
-    padding:20px 60px;
+    padding:20px 1px;
     margin-top: 5% ;
     outline: none;
     background-color: #27ae60;
