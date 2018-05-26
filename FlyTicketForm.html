@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>The great Trip</title>
     <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png">
@@ -20,34 +20,41 @@
     <meta name="theme-color" content="#e8d93d">
     <link rel="manifest" href="manifest.json">
     <meta charset="UTF-8">
-    <meta name="Description" content="The Great Trip">
     <meta name="author" content="Tom Rommens">
+    <meta name="Description" content="The Great Unknow">
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="assets/css/screen.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
 <div id="container">
-<h1 id="Country"> </h1>
-<button class="button-one" onclick=" location.href= 'index.html' ">Throw me back in the unknown</button>
-<button class="button-one" onclick=" location.href= 'FlyTicketForm.html' ">Give me tickets</button>
+    <h1>The great Tickets</h1>
+    <!--<a href="RandomCountry">Take me away</a>-->
+    <button class="button-one" onclick=" location.href= 'index.html' ">Back</button>
 
-<article>
-    <h4 id="name">Country: </h4>
-    <h4 id="capital">Capital: </h4>
-    <h4>Flag: </h4><div id="flag"></div>
-    <h4 id="population">Population: </h4>
-    <h4 id="region">Region: </h4>
-    <h4 id="currencies">Currency: </h4>
-    <div id="locatieResultaat">
-        <iframe id="locatie" width="100%" height="100%" style="border:0" allowfullscreen></iframe>
-    </div>
-</article>
+    <section id="ticketInput">
+        <p>Number of adults:</p>
+        <input name="numberOfAdults" type="number" id="numberOfAdults" min="0" />
+
+        <p>Number of children:</p>
+        <input name="numberOfChildren" type="number" id="numberOfChildren" min="0" />
+
+        <p>Date of departure</p>
+        <input name="dateDeparture" type="text" id="dateDeparture" placeholder="YYMMDD">
+
+        <p>Date of arrival</p>
+        <input name="dateArrival" type="text" id="dateArrival" placeholder="YYMMDD">
+
+        <button id="tickets" >Look for tickets</button>
+        <button id="log" >Look log</button>
+
+    </section>
 
 
 
-<script type="text/javascript" src="assets/js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="assets/js/script.js"></script>
+
+    <script type="text/javascript" src="assets/js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
 </div>
 </body>
 </html>

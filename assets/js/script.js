@@ -1,14 +1,8 @@
 const RandomCountryUrl = "RandomCountry.html";
-// function createANewStorage() {
-//     if(localStorage.getItem('countries') == null) {
-//         var countries = [];
-//     }else{
-//         console.log("Localstorage is al ready")
-//     }
-// }
+const FlyTicketFormUrl = "FlyTicketForm.html";
+let countries = [];
+let countryCode = "";
 
-var countries = [];
-// fillInCountriesList();
 
 
 
@@ -36,7 +30,7 @@ if (navigator.serviceWorker.controller) {
 
 
 
-var handleErrors = function (response) {
+let handleErrors = function (response) {
     if (!response.ok) {
         throw Error(response.statusText);
     }
@@ -44,8 +38,8 @@ var handleErrors = function (response) {
 };
 
 
-var giveRandomCountry = function () {
-    var RandomNumber = Math.floor((Math.random() * 999) + 1);
+let giveRandomCountry = function () {
+    let RandomNumber = Math.floor((Math.random() * 999) + 1);
     fetch("https://restcountries.eu/rest/v2/callingcode/" + RandomNumber)
         .then(handleErrors)
         .then(response => response.json())
@@ -65,10 +59,14 @@ var giveRandomCountry = function () {
                 $resultaatString += ` ( ${currenciesSymbol} )`;
             }
             $('#currencies').append($resultaatString);
-            let code = res[0].alpha2Code;
-            let button = `<button class='button-one' onclick=' location.href= "https://www.skyscanner.net/transport/flights/brus/${code}/180526/180602/?adults=1&children=0&adultsv2=1&childrenv2=&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&ref=home"' \>Look for tickets</button>`;
-            $('#tickets').append(button);
-            var locatie1 = "https://www.google.com/maps/embed/v1/place?q=" + res[0].latlng[0] + "%2C" + res[0].latlng[1] + "&key=AIzaSyB2VV0_vn7reEhn-N6ULWQKB8sxJzl_-zQ";
+            console.log(res[0].alpha2Code);
+            countryCode = res[0].alpha2Code;
+            console.log(countryCode);
+
+
+
+
+            let locatie1 = "https://www.google.com/maps/embed/v1/place?q=" + res[0].latlng[0] + "%2C" + res[0].latlng[1] + "&key=AIzaSyB2VV0_vn7reEhn-N6ULWQKB8sxJzl_-zQ";
             $('#locatie').attr("src", locatie1);
         }).catch(error => {
         // console.error(error);
@@ -77,7 +75,20 @@ var giveRandomCountry = function () {
     })
 };
 
-var saveCountry = function (country) {
+let orderTickets = function () {
+        let numberOfAdults = document.getElementById('numberOfAdults').value;
+        let numberOfChildren = document.getElementById('numberOfChildren').value;
+        let dateDeparture = document.getElementById('dateDeparture').value;
+
+        let dateArrival = document.getElementById('dateArrival').value;
+        console.log(countryCode);
+        document.getElementById("tickets").onclick = function () {
+            location.href = "https://www.skyscanner.net/transport/flights/brus/" + countryCode + "/" + dateDeparture + "/" + dateArrival + "/?adults=" + numberOfAdults + "&children=" + numberOfChildren + "&adultsv2=" + numberOfAdults + "&childrenv2=" + numberOfChildren + "&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&ref=home";
+        };
+        //$('#tickets').append(button);
+};
+
+let saveCountry = function (country) {
      if((typeof Storage) !== void(0)) {
         countries.push(country);
         localStorage.setItem('countries', JSON.stringify(countries));
@@ -85,9 +96,9 @@ var saveCountry = function (country) {
 };
 
 
-var getCountry = function(){
+let getCountry = function(){
     if((typeof Storage)  !== void(0)) {
-        var localCountries = JSON.parse(localStorage.getItem('countries'));
+        let localCountries = JSON.parse(localStorage.getItem('countries'));
 
         if( localCountries  !== null) {
             countries = localCountries;
@@ -97,12 +108,12 @@ var getCountry = function(){
 
 };
 
-var displayCountries = function () {
-    var numberOfRandomCountries = countries.length;
+let displayCountries = function () {
+    let numberOfRandomCountries = countries.length;
     if(numberOfRandomCountries > 0){
-        var list = '<ul>';
-        for(var i =0; i < numberOfRandomCountries; i++) {
-            list += '<li>'+ countries[i] + '</li>';
+        let list = '<ul>';
+        for(let i =0; i < numberOfRandomCountries; i++) {
+            list += '<li> - '+ countries[i] + '</li>';
         }
 
         list += '</ul>';
@@ -110,16 +121,17 @@ var displayCountries = function () {
     }
 };
 
-var test = function () {
-
-}
 
 $('document').ready(function () {
     //createANewStorage();
     getCountry();
     if (document.URL.indexOf(RandomCountryUrl) > 1) {
         giveRandomCountry();
+    };
+    if (document.URL.indexOf(FlyTicketFormUrl) > 1) {
+        $('#tickets').on('click', orderTickets);
     }
+
 });
 // var toonQuote = function (e) {
 //     e.preventDefault();
