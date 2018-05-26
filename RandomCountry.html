@@ -29,7 +29,7 @@
 <body>
 <div id="container">
 <h1 id="Country"> </h1>
-<button class="button-one" onclick=" location.href= 'index.html' ">Throw me back in the unknown</button>
+<div id="back"></div>
     <section id="ticketInput">
         <p>Number of adults:</p>
         <input name="numberOfAdults" type="number" id="numberOfAdults" min="0" />
@@ -42,6 +42,8 @@
 
         <p>Date of arrival: (YYMMDD)</p>
         <input name="dateArrival" type="number" id="dateArrival" placeholder="Example: 180629">
+
+        <button id="generateTickets" class="button-one">Show me some tickets</button>
 
     </section>
 <button class="button-one" id="tickets">Give me tickets</button>

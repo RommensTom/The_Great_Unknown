@@ -38,33 +38,26 @@ let giveRandomCountry = function () {
             landeke.population = res[0].population;
             landeke.region = res[0].region;
             console.log(res[0].name);
-            $('#Country').append("The great " + res[0].name);
+            $('#Country').append("The great " + landeke.naam);
             saveCountry(landeke);
-            $('#name').append(res[0].name);
-            $('#capital').append(res[0].capital);
+            $('#name').append(landeke.naam);
+            $('#capital').append(landeke.capital);
             $('#flag').append("<img src=' " + res[0].flag + " ' alt='Country flag'>");
-            $('#population').append(res[0].population);
-            $('#region').append(res[0].region);
+            $('#population').append(landeke.population);
+            $('#region').append(landeke.region);
             let $resultaatString = res[0].currencies[0].name;
             const currenciesSymbol = res[0].currencies[0].symbol;
             if (currenciesSymbol != null) {
                 $resultaatString += ` ( ${currenciesSymbol} )`;
             }
             $('#currencies').append($resultaatString);
-            let countryCode = res[0].alpha2Code;
-            document.getElementById("tickets").onclick = function () {
-                let numberOfAdults = document.getElementById('numberOfAdults').value;
-                let numberOfChildren = document.getElementById('numberOfChildren').value;
-                let dateDeparture = document.getElementById('dateDeparture').value;
-
-                let dateArrival = document.getElementById('dateArrival').value;
-                location.href = "https://www.skyscanner.net/transport/flights/brus/" + countryCode + "/" + dateDeparture + "/" + dateArrival + "/?adults=" + numberOfAdults + "&children=" + numberOfChildren + "&adultsv2=" + numberOfAdults + "&childrenv2=" + numberOfChildren + "&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&ref=home";
-            };
+            $('#tickets').attr('data-country', res[0].alpha2Code);
 
 
 
             let locatie1 = "https://www.google.com/maps/embed/v1/place?q=" + res[0].latlng[0] + "%2C" + res[0].latlng[1] + "&key=AIzaSyB2VV0_vn7reEhn-N6ULWQKB8sxJzl_-zQ";
             $('#locatie').attr("src", locatie1);
+            $('#back').append(`<button class="button-one" onclick=" location.href= 'index.html' ">Back</button>`);
         }).catch(error => {
         giveRandomCountry();
     })
@@ -107,12 +100,28 @@ let displayCountries = function () {
     }
 };
 
+let orderTickets = function () {
+    $('#ticketInput').show();
+    $('article, #tickets').hide();
+};
+
+let generateTheTickets = function () {
+    let numberOfAdults = $('#numberOfAdults').val();
+    let numberOfChildren = $('#numberOfChildren').val();
+    let dateDeparture = $('#dateDeparture').val();
+    let dateArrival = $('#dateArrival').val();
+    let countryCode = $('#tickets').attr('data-country');
+    window.open(`https://www.skyscanner.net/transport/flights/brus/${countryCode}/${dateDeparture}/${dateArrival}/?adults=${numberOfAdults}&children=${numberOfChildren}&adultsv2=${numberOfAdults}&childrenv2=${numberOfChildren}&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&ref=home`);
+};
 
 $('document').ready(function () {
     //createANewStorage();
     getCountry();
     if (document.URL.indexOf(RandomCountryUrl) > 1) {
         giveRandomCountry();
+        $('#ticketInput').hide();
+        $('#tickets').on('click', orderTickets);
+        $('#generateTickets').on('click', generateTheTickets)
     }
 
 });
