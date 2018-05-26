@@ -34,6 +34,16 @@ img{
     width: 100%;
     height: 100%;
 }
+
+article #historyList{
+    border-bottom: dotted 1px #877B66;
+    margin: 1%;
+    padding: 1%;
+}
+#ticketInput{
+    margin-top: 5%;
+}
+
 .button-one {
     width: 100%;
     padding:20px 1px;
