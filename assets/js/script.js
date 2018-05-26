@@ -1,7 +1,6 @@
 const RandomCountryUrl = "RandomCountry.html";
-const FlyTicketFormUrl = "FlyTicketForm.html";
 let countries = [];
-let countryCode = "";
+
 
 
 
@@ -59,34 +58,25 @@ let giveRandomCountry = function () {
                 $resultaatString += ` ( ${currenciesSymbol} )`;
             }
             $('#currencies').append($resultaatString);
-            console.log(res[0].alpha2Code);
-            countryCode = res[0].alpha2Code;
-            console.log(countryCode);
+            let countryCode = res[0].alpha2Code;
+            document.getElementById("tickets").onclick = function () {
+                let numberOfAdults = document.getElementById('numberOfAdults').value;
+                let numberOfChildren = document.getElementById('numberOfChildren').value;
+                let dateDeparture = document.getElementById('dateDeparture').value;
 
+                let dateArrival = document.getElementById('dateArrival').value;
+                location.href = "https://www.skyscanner.net/transport/flights/brus/" + countryCode + "/" + dateDeparture + "/" + dateArrival + "/?adults=" + numberOfAdults + "&children=" + numberOfChildren + "&adultsv2=" + numberOfAdults + "&childrenv2=" + numberOfChildren + "&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&ref=home";
+            };
 
 
 
             let locatie1 = "https://www.google.com/maps/embed/v1/place?q=" + res[0].latlng[0] + "%2C" + res[0].latlng[1] + "&key=AIzaSyB2VV0_vn7reEhn-N6ULWQKB8sxJzl_-zQ";
             $('#locatie').attr("src", locatie1);
         }).catch(error => {
-        // console.error(error);
-        // console.log("lol");
         giveRandomCountry();
     })
 };
 
-let orderTickets = function () {
-        let numberOfAdults = document.getElementById('numberOfAdults').value;
-        let numberOfChildren = document.getElementById('numberOfChildren').value;
-        let dateDeparture = document.getElementById('dateDeparture').value;
-
-        let dateArrival = document.getElementById('dateArrival').value;
-        console.log(countryCode);
-        document.getElementById("tickets").onclick = function () {
-            location.href = "https://www.skyscanner.net/transport/flights/brus/" + countryCode + "/" + dateDeparture + "/" + dateArrival + "/?adults=" + numberOfAdults + "&children=" + numberOfChildren + "&adultsv2=" + numberOfAdults + "&childrenv2=" + numberOfChildren + "&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&ref=home";
-        };
-        //$('#tickets').append(button);
-};
 
 let saveCountry = function (country) {
      if((typeof Storage) !== void(0)) {
@@ -127,9 +117,6 @@ $('document').ready(function () {
     getCountry();
     if (document.URL.indexOf(RandomCountryUrl) > 1) {
         giveRandomCountry();
-    };
-    if (document.URL.indexOf(FlyTicketFormUrl) > 1) {
-        $('#tickets').on('click', orderTickets);
     }
 
 });

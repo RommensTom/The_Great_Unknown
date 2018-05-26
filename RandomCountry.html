@@ -30,7 +30,22 @@
 <div id="container">
 <h1 id="Country"> </h1>
 <button class="button-one" onclick=" location.href= 'index.html' ">Throw me back in the unknown</button>
-<button class="button-one" onclick=" location.href= 'FlyTicketForm.html' ">Give me tickets</button>
+    <section id="ticketInput">
+        <p>Number of adults:</p>
+        <input name="numberOfAdults" type="number" id="numberOfAdults" min="0" />
+
+        <p>Number of children:</p>
+        <input name="numberOfChildren" type="number" id="numberOfChildren" min="0" />
+
+        <p>Date of departure</p>
+        <input name="dateDeparture" type="text" id="dateDeparture" placeholder="YYMMDD">
+
+        <p>Date of arrival</p>
+        <input name="dateArrival" type="text" id="dateArrival" placeholder="YYMMDD">
+
+
+    </section>
+<button class="button-one" id="tickets">Give me tickets</button>
 
 <article>
     <h4 id="name">Country: </h4>
