@@ -114,11 +114,23 @@ let generateTheTickets = function () {
     window.open(`https://www.skyscanner.net/transport/flights/brus/${countryCode}/${dateDeparture}/${dateArrival}/?adults=${numberOfAdults}&children=${numberOfChildren}&adultsv2=${numberOfAdults}&childrenv2=${numberOfChildren}&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&ref=home`);
 };
 
+let checkConnection = function () {
+    let online = navigator.onLine;
+    if(!online){
+        $("#offline").html("You are not connected to the internet");
+        document.getElementById("tickets").disabled = true;
+    }else {
+        $("#offline").html("");
+        document.getElementById("tickets").disabled = false;
+    }
+};
+
 $('document').ready(function () {
     //createANewStorage();
     getCountry();
     if (document.URL.indexOf(RandomCountryUrl) > 1) {
         giveRandomCountry();
+        checkConnection();
         $('#ticketInput').hide();
         $('#tickets').on('click', orderTickets);
         $('#generateTickets').on('click', generateTheTickets)
