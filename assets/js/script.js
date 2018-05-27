@@ -26,6 +26,7 @@ let handleErrors = function (response) {
 
 
 let giveRandomCountry = function () {
+    if(navigator.onLine){
     let RandomNumber = Math.floor((Math.random() * 999) + 1);
     fetch("https://restcountries.eu/rest/v2/callingcode/" + RandomNumber)
         .then(handleErrors)
@@ -60,8 +61,9 @@ let giveRandomCountry = function () {
             $('#back').append(`<button class="button-one" onclick=" location.href= 'index.html' ">Back</button>`);
         }).catch(error => {
         giveRandomCountry();
+
     })
-};
+}};
 
 
 let saveCountry = function (country) {
@@ -119,6 +121,7 @@ let checkConnection = function () {
     if(!online){
         $("#offline").html("You are not connected to the internet");
         document.getElementById("tickets").disabled = true;
+        $('#back').append(`<button class="button-one" onclick=" location.href= 'index.html' ">Back</button>`);
     }else {
         $("#offline").html("");
         document.getElementById("tickets").disabled = false;
