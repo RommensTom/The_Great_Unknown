@@ -32,13 +32,11 @@ let giveRandomCountry = function () {
         .then(handleErrors)
         .then(response => response.json())
         .then(res => {
-            console.log(res);
             let landeke = {};
             landeke.naam = res[0].name;
             landeke.capital = res[0].capital;
             landeke.population = res[0].population;
             landeke.region = res[0].region;
-            console.log(res[0].name);
             $('#Country').append("The Great " + landeke.naam);
             saveCountry(landeke);
             $('#name').append(landeke.naam);
