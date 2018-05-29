@@ -41,12 +41,10 @@ article #historyList{
     margin: 1%;
     padding: 1%;
 }
-section #ticketInput{
-    margin-top: 15%;
-}
 
 #ticketInput{
     display: none;
+    margin-top: 10%;
 }
 
 
