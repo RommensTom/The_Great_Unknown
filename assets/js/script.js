@@ -39,7 +39,7 @@ let giveRandomCountry = function () {
             landeke.population = res[0].population;
             landeke.region = res[0].region;
             console.log(res[0].name);
-            $('#Country').append("The great " + landeke.naam);
+            $('#Country').append("The Great " + landeke.naam);
             saveCountry(landeke);
             $('#name').append(landeke.naam);
             $('#capital').append(landeke.capital);
