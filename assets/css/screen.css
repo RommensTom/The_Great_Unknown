@@ -45,6 +45,10 @@ section #ticketInput{
     margin-top: 15%;
 }
 
+#ticketInput{
+    display: none;
+}
+
 
 iframe{
     width:100% ;

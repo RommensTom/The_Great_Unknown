@@ -132,7 +132,6 @@ $('document').ready(function () {
     if (document.URL.indexOf(RandomCountryUrl) > 1) {
         giveRandomCountry();
         checkConnection();
-        $('#ticketInput').hide();
         $('#tickets').on('click', orderTickets);
         $('#generateTickets').on('click', generateTheTickets)
     }
